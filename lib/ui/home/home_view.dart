@@ -1,11 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:tiktok_app/app/app.router.dart';
 import 'package:tiktok_app/app/app_base_view_model.dart';
 import 'package:tiktok_app/di/locator.dart';
 import 'package:tiktok_app/ui/home/home_view_model.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:tiktok_app/widgets/my_action_item.dart';
+import 'package:tiktok_app/widgets/video_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({
@@ -15,55 +15,43 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
-        viewModelBuilder: () => HomeViewModel(),
-        onViewModelReady: (model) => model.init(),
-        builder: (context, model, child) => Scaffold(
-              appBar: AppBar(
-                actions: [
-                  IconButton(
-                      onPressed: () {
-                        locator<AppBaseViewModel>().changeTheme();
-                      },
-                      icon: locator<AppBaseViewModel>().theme == ThemeMode.light
-                          ? const Icon(Icons.dark_mode)
-                          : const Icon(Icons.light_mode))
-                ],
-              ),
-              body: SingleChildScrollView(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Hello from my app',
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                      Text(
-                        '${FirebaseAuth.instance.currentUser?.isAnonymous}',
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          model.navigationService.navigateTo(Routes.detailView);
-                        },
-                        child: const Text(
-                          'Go to new page ',
-                        ),
-                      ),
-                      model.videos == null
-                          ? Container()
-                          : Container(
-                              height: 700,
-                              child: WebView(
-                                initialUrl: model.videos?.first.videoUrl,
-                                allowsInlineMediaPlayback: true,
-                                initialMediaPlaybackPolicy:
-                                    AutoMediaPlaybackPolicy.always_allow,
-                              ),
-                            )
-                    ],
+      viewModelBuilder: () => HomeViewModel(),
+      onViewModelReady: (model) => model.init(),
+      builder: (context, model, child) => Scaffold(
+        appBar: AppBar(
+          title: Text('Tiktok App'),
+          actions: [
+            MyActionWidget(
+              onPressed: () {
+                locator<AppBaseViewModel>().changeTheme();
+              },
+            )
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: model.videos == null
+              ? SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
+                    ),
                   ),
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: model.videos!.length,
+                  itemBuilder: (context, index) {
+                    return VideoWidget(
+                      video: model.videos![index],
+                    );
+                  },
                 ),
-              ),
-            ));
+        ),
+      ),
+    );
   }
 }

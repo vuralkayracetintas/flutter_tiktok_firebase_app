@@ -576,7 +576,7 @@ class ThemeConst {
         fontStyle: FontStyle.normal,
       ),
       headlineSmall: GoogleFonts.lato(
-        color: const Color(0xffffffff),
+        color: Colors.white,
         fontSize: 14,
         fontWeight: FontWeight.w400,
         fontStyle: FontStyle.normal,

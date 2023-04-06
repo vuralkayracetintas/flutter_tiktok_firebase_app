@@ -11,9 +11,12 @@ class SplashView extends StatelessWidget {
         onViewModelReady: (model) => model.initialize(),
         viewModelBuilder: () => SplashViewModel(),
         builder: (context, model, child) {
-          return const Scaffold(
+          return Scaffold(
             body: Center(
-              child: Text('Splash View'),
+              child: Text(
+                'Splash View',
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
             ),
           );
         });

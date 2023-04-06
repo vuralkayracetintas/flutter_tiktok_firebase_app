@@ -15,8 +15,10 @@ class AppBaseViewModel extends BaseViewModel {
   changeTheme() {
     if (theme == ThemeMode.dark) {
       theme = ThemeMode.light;
+      CircularProgressIndicator(color: Colors.white);
     } else {
       theme = ThemeMode.dark;
+      CircularProgressIndicator(color: Colors.white);
     }
     locator<AppBaseViewModel>().notifyListeners();
   }
