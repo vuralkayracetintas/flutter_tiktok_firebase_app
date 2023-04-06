@@ -4,6 +4,7 @@ import 'package:tiktok_app/models/responses/firebase_videos.dart';
 class HomeViewModel extends AppBaseViewModel {
   List<FirebaseVideos>? videos;
   init() {
+    checkConnectivity();
     firebaseService.getVideos().then((value) {
       videos = value;
       notifyListeners();

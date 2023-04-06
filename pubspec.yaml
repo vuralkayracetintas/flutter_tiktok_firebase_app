@@ -35,6 +35,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.3
   webview_flutter: ^3.0.4
+  connectivity_plus: ^3.0.3
 
   #FIREBASE
   firebase_core: ^2.9.0

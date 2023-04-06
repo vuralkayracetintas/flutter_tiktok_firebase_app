@@ -9,20 +9,21 @@ import 'package:flutter/material.dart' as _i5;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i6;
-import 'package:tiktok_app/ui/details/details_view.dart' as _i3;
 import 'package:tiktok_app/ui/home/home_view.dart' as _i2;
+import 'package:tiktok_app/ui/no_connection_view/no_connection_view.dart'
+    as _i3;
 import 'package:tiktok_app/ui/splash/splash_view.dart' as _i4;
 
 class Routes {
   static const homeView = '/home-view';
 
-  static const detailView = '/detail-view';
+  static const noConnectionView = '/no-connection-view';
 
   static const splashView = '/';
 
   static const all = <String>{
     homeView,
-    detailView,
+    noConnectionView,
     splashView,
   };
 }
@@ -34,8 +35,8 @@ class StackedRouter extends _i1.RouterBase {
       page: _i2.HomeView,
     ),
     _i1.RouteDef(
-      Routes.detailView,
-      page: _i3.DetailView,
+      Routes.noConnectionView,
+      page: _i3.NoConnectionView,
     ),
     _i1.RouteDef(
       Routes.splashView,
@@ -51,9 +52,9 @@ class StackedRouter extends _i1.RouterBase {
         maintainState: false,
       );
     },
-    _i3.DetailView: (data) {
+    _i3.NoConnectionView: (data) {
       return _i5.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i3.DetailView(),
+        builder: (context) => _i3.NoConnectionView(),
         settings: data,
         maintainState: false,
       );
@@ -88,14 +89,14 @@ extension NavigatorStateExtension on _i6.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToDetailView([
+  Future<dynamic> navigateToNoConnectionView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.detailView,
+    return navigateTo<dynamic>(Routes.noConnectionView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -130,14 +131,14 @@ extension NavigatorStateExtension on _i6.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithDetailView([
+  Future<dynamic> replaceWithNoConnectionView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return replaceWith<dynamic>(Routes.detailView,
+    return replaceWith<dynamic>(Routes.noConnectionView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
